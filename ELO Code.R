@@ -1,5 +1,6 @@
-set.of.data <- paste(getwd(),"/","Seasons","/",sep ="")
-setwd("F:\GitHub\Final-Project-NHL\Seasons")
+NHLwd <- getwd()
+Seasons.Path <- paste(getwd(),"/","Seasons","/",sep ="")
+setwd(paste(NHLwd, "/", "Seasons", "/", sep = ""))
 nhl.seasons <- list.files(pattern="*.csv")
 for (i in 1:length(nhl.seasons)) assign(nhl.seasons[i], read.csv(nhl.seasons[i]))
 
@@ -34,7 +35,7 @@ elo.test <- function(Team1, Team2, k=32) {
   return(df)
 }
 
-elo.test(1200,1000,26)
+elo.test(1200,1000,5)
 
 
 unique(NHLTwoSix$Home)
