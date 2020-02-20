@@ -1,0 +1,45 @@
+set.of.data <- paste(getwd(),"/","Seasons","/",sep ="")
+setwd("F:\GitHub\Final-Project-NHL\Seasons")
+nhl.seasons <- list.files(pattern="*.csv")
+for (i in 1:length(nhl.seasons)) assign(nhl.seasons[i], read.csv(nhl.seasons[i]))
+
+
+# Creating a base elo function for individual matches. 
+# This function should be run approx 1200 times per season
+
+
+elo.test <- function(Team1, Team2, k=32) {
+  
+  # Expected score for player A and for player B.
+  EV1 <- (1 / (1 + 10^((Team2 - Team1)/400)))
+  EV2 <- (1 / (1 + 10^((Team1 - Team2)/400)))
+  
+  # Calculating change in rating if win or lose
+  UpdateWin1  <- Team1 + k * (1 - EV1)
+  UpdateLose1  <- Team1 + k * (0 - EV1)
+  
+  # Do the same for team2
+  UpdateWin2 <- Team2 + ((1-EV1)* k)
+  UpdateLose2 <- Team2 + ((0-EV1)* k)
+  
+  # prob is the expected score column giving probabilities for winning
+  prob <- (data.frame(prob=c(EV1,EV2)) * 100)
+  # Win 1 shows the updated ratings should Team1 win
+  Win1 <- (data.frame(Win1=c(UpdateWin1,UpdateLose2)))
+  # Likewise for team 2
+  Win2 <- (data.frame(Win2=c(UpdateLose1,UpdateWin2)))
+  
+  df <- cbind(prob,Win1,Win2)
+  rownames(df) <- c('Team1','Team2')
+  return(df)
+}
+
+elo.test(1200,1000,26)
+
+
+unique(NHLTwoSix$Home)
+
+
+
+teams <-c(unique(NHLTwoSix$Home))
+
