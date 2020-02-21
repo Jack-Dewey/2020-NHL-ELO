@@ -2,7 +2,7 @@ NHLwd <- getwd()
 Seasons.Path <- paste(getwd(),"/","Seasons","/",sep ="")
 setwd(paste(NHLwd, "/", "Seasons", "/", sep = ""))
 nhl.seasons <- list.files(pattern="*.csv")
-for (i in 1:length(nhl.seasons)) assign(nhl.seasons[i], read.csv(nhl.seasons[i]))
+for (i in 1:length(nhl.seasons)) assign(nhl.seasons[i], read.csv(nhl.seasons[i], stringsAsFactors = FALSE))
 
 
 # Creating a base elo function for individual matches. 
@@ -30,17 +30,32 @@ elo.test <- function(Team1, Team2, k=32) {
   # Likewise for team 2
   Win2 <- (data.frame(Win2=c(UpdateLose1,UpdateWin2)))
   
-  df <- cbind(prob,Win1,Win2)
-  rownames(df) <- c('Team1','Team2')
-  return(df)
+  dattable <- cbind(prob,Win1,Win2)
+  rownames(dattable) <- c('Team1','Team2')
+  return(dattable)
 }
 
 elo.test(1200,1000,5)
 
 
-unique(NHLTwoSix$Home)
+unique(NHL2006.csv$Home)
 
 
 
-teams <-c(unique(NHLTwoSix$Home))
+teams <-(unique(NHL2006.csv$Home))
+teams
+team.objects <- mget(NHL2006.csv$Home)
+?mget
+saveRDS(teamssave, "NHL2006.csv")
+save()
+?saveRDS
+list(teams)
+teams.char <- as.character(teams)
+binded.teams <- mget(teams.char)
 
+
+
+for(i in length(teams)){
+  
+}
+  
