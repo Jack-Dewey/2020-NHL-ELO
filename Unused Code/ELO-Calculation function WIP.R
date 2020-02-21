@@ -36,7 +36,7 @@ elo.test <- function(Team1, Team2, k) {
 }
 # We can test our model if Team1 has 1200 rating, Team2 with 1000 rating and a k of 32
 
-elo.test(1200,1100,32)
+elo.test(1000,1000,32)
 
 # We use unique function to determine the unique teams that played each season
 # We store the team names in teams.char
@@ -64,27 +64,21 @@ teams.table[2,] # Just a test that this works
 getRating <- function(team){
   get.rating <- teams.table$teams.rating
   names(get.rating) <- teams.table$teams.char
-  teamrating <- unname(get.rating[team])
+  teamrating <- (get.rating[team])
   teamrating <- as.numeric(levels(teamrating))[teamrating]  # Needed to make as numeric
   print(teamrating)                                         # elo.test no accept factors
 }
+teams.table$teams.rating[5] = 1002
+teams.rating[5] = 1001
 getRating(NHL2018.csv[1,2])
 
-# Writing a getname function
-get.name <- function(team){
-  team.name <- 
-}
-
-# Now working on the model over the course of the 2018 season
-
-for(i in 1:1){
-  results <- elo.calculation(getRating(NHL2018.csv[i,4]), getRating(NHL2018.csv[i,2]), 32)
-  print(results)
+# Writing an apply new ratings function
+new.ratings <- function(rating.winner, rating.loser){
+  team.name <- teams.table$teams.char
   
 }
 
 
-elo.test(getRating(NHL2018.csv[i,4]), getRating(NHL2018.csv[i,2]), 32)
 
 
 # Rewriting the elo calculation to be by winner vs loser
@@ -117,6 +111,27 @@ elo.calculation <- function(Winner, Loser, k) {
 }
 
 elo.calculation(1200,1000,32)
+
+
+
+# Now working on the model over the course of the 2018 season
+
+for(i in 1:1){
+  results <- elo.calculation(getRating(NHL2018.csv[i,4]), getRating(NHL2018.csv[i,2]), 32)
+  
+  
+}
+
+
+elo.test(getRating(NHL2018.csv[i,4]), getRating(NHL2018.csv[i,2]), 32)
+
+
+
+
+
+
+
+
 
 
 

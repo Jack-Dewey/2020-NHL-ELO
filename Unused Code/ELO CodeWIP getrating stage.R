@@ -35,9 +35,8 @@ elo.test <- function(Team1, Team2, k) {
   return(dattable)
 }
 # We can test our model if Team1 has 1200 rating, Team2 with 1000 rating and a k of 32
-elo.test(1200,1000,32)
 
-
+elo.test(1200,1100,32)
 
 # We use unique function to determine the unique teams that played each season
 # We store the team names in teams.char
@@ -66,13 +65,60 @@ getRating <- function(team){
   get.rating <- teams.table$teams.rating
   names(get.rating) <- teams.table$teams.char
   teamrating <- unname(get.rating[team])
-  print(teamrating)
+  teamrating <- as.numeric(levels(teamrating))[teamrating]  # Needed to make as numeric
+  print(teamrating)                                         # elo.test no accept factors
 }
 getRating(NHL2018.csv[1,2])
 
 
 
 # Now working on the model over the course of the 2018 season
+
+for(i in 1:1){
+  results <- elo.test(getRating(NHL2018.csv[i,4]), getRating(NHL2018.csv[i,2]), 32)
+  print(results)
+}
+
+
+elo.test(getRating(NHL2018.csv[i,4]), getRating(NHL2018.csv[i,2]), 32)
+
+
+# Rewriting the elo calculation to be by winner vs loser
+elo.calculation <- function(Winner, Loser, k) {
+  
+  # Expected score for player A and for player B.
+  EVWinner <- (1 / (1 + 10^((Loser - Winner)/400)))
+  EVLoser <- (1 / (1 + 10^((Winner - Loser)/400)))
+  
+  # Calculating change in rating if win or lose
+  UpdatedWinner <- Winner + k * (1 - EVWinner)
+  
+  # Do the same for team2
+  UpdatedLoser<- Loser + ((0-EVLoser)* k)
+  
+  # prob is the expected score column giving probabilities for winning
+  prob <- (data.frame(prob=c(EVWinner,EVLoser)) * 100)
+  # Win 1 shows the updated ratings should Team1 win
+  NewWinnerRating <- (data.frame(WinnerRating=c(UpdatedWinner)))
+  # Likewise for team 2
+  NewLoserRating <- (data.frame(LoserRating=c(UpdatedLoser)))
+  
+  dattable <- cbind(NewWinnerRating,NewLoserRating)
+  rownames(dattable) <- c('Updated Ratings')
+  print(NewWinnerRating)
+  NewWinner.temp <<- as.numeric(NewWinnerRating)
+  print(NewLoserRating)
+  NewLoser.temp <<- as.numeric(NewLoserRating)
+  return(dattable)
+}
+
+elo.calculation(1200,1000,32)
+
+
+
+
+
+
 
 
 for(i in 1:nrow(NHL2018.csv)){
@@ -81,13 +127,9 @@ for(i in 1:nrow(NHL2018.csv)){
 
 
 
-# Let's turn this into a function
-getRating <- function(team){
-  get.rating <- teams.table$teams.rating
-  names(get.rating) <- teams.table$teams.char
-  teamrating <- unname(get.rating[team])
-  return(teamrating)
-}
+
+
+
 
 
 
@@ -103,6 +145,10 @@ get.rating <- teams.table$teams.rating
 names(get.rating) <- teams.table$teams.char
 get.rating['Arizona Coyotes']
 unname(get.rating['Arizona Coyotes'])
+
+
+
+
 
 
 testing
