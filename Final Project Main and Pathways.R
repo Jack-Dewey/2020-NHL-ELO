@@ -60,6 +60,7 @@ subset(TotalNHL.csv,
 TotalNHL.csv$Home == "Vancouver Canucks"
 
 
+
 sort(unique(NHL2006.csv$Visitor),  )
 
 
@@ -81,9 +82,9 @@ TotalNHLtable <- mget(nhl.seasons)
 
 table(TotalNHLtable$NHL2006.csv)
 
-for(i in 1:length(nhl.seasons)){
+
   
-}
+
 
 #--------------------------------- 2. Directory Creation -----------------------
 
@@ -96,3 +97,11 @@ dir.create("Seasons")
 
 #Pathway to our seasons folder
 Seasons.Path <- paste(NHLwd, "/", "Seasons", "/", sep = "")
+
+
+
+
+
+
+
+#------- 
