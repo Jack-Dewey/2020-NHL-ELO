@@ -39,8 +39,7 @@ elo.test <- function(Team1, Team2, k) {   # Team 1 and Team 2 values are their n
   UpdateLose2 <- Team2 + ((0-EV1)* k)
   
   # prob is the expected score column giving probabilities for winning
-  # creates a data frame of the expected values given as percentage multiplied
-  # by 100 to give proportion out of 100
+  # this creates a data frame of the expected values given as percentage
   prob <- (data.frame(prob=c(EV1,EV2)) * 100)
   # Win 1 shows the updated ratings should Team1 win
   Win1 <- (data.frame(Win1=c(UpdateWin1,UpdateLose2)))
@@ -53,8 +52,8 @@ elo.test <- function(Team1, Team2, k) {   # Team 1 and Team 2 values are their n
 }
 # We can test our model; Team1 has 1200 rating, Team2 with 1000 rating and a k of 32
 
+rep(elo.test(1100,1000,32),7)
 elo.test(1000,1000,32)
-
 
 # We use unique function to determine the number of unique teams that played each season
 # We store the team names in teams.char
@@ -97,16 +96,15 @@ getRating(NHL2018.csv[1,2]) # If we see on our NHL2018.csv dataset, the Calgary
 # We see we get the expected result of 1001, which corresponds to the value we gave the Flames
 getRating(NHL2018.csv[1,4]) # Running the test on NHL2018.csv[1,4] we see that
 # the Edmonton Oilers still have their value of 1000
-
-
-
-
-
-
-
-
-
-
+#
+#
+#
+# I rewrote our elo.test function as elo.calculation to streamline our code
+# In this instance, we dont ask for a percentage to be given for the victories of either team
+# Instead this accesses the data assuming one team is already decided as the winner
+# This will reduce the amount of computation required.
+# This also made it easier to store result by winner/loser
+#
 # Rewriting the elo calculation to be by winner vs loser
 elo.calculation <- function(Winner, Loser, k) {
   
@@ -129,27 +127,33 @@ elo.calculation <- function(Winner, Loser, k) {
   
   dattable <- cbind(NewWinnerRating,NewLoserRating)
   rownames(dattable) <- c('Updated Ratings')
-  print(NewWinnerRating)
-  NewWinner.temp <<- as.numeric(NewWinnerRating)
-  print(NewLoserRating)
-  NewLoser.temp <<- as.numeric(NewLoserRating)
-  return(dattable)
+  
+  NewWinner.temp <<- as.numeric(NewWinnerRating)  # saves as a global variable
+                                                 # to be used to store the ratings
+  NewLoser.temp <<- as.numeric(NewLoserRating)    # in our teams.table
+  return(dattable)                                # The .temps will be overwritten on each iteration
 }
 
 elo.calculation(1200,1000,32)
 
 
-
+# WORK IN PROGRESS LOOP
 # Now working on the model over the course of the 2018 season
-
+# Trying to work using our getRating function and elo.calculation
+# Also trying to get rid of the 1001, 1000 levels given by the below function
+# If we just ask for the results - it works.
 for(i in 1:1){
   results <- elo.calculation(getRating(NHL2018.csv[i,4]), getRating(NHL2018.csv[i,2]), 32)
-  
-  
+  print(results)
 }
+# But for whatever reason if we try the entire loop, it prints [1]1001, [1]1000
+# But the function does serve its purpose
+# Work in progress on applying it to the entire dataset
+# The main issue I am having with it is that I am trying to pair the updating ratings
+# with the appropriate team
+# The pairing was easy to do from one side, using the getRatings function, 
+# but much harder going the other direction
 
-
-elo.test(getRating(NHL2018.csv[i,4]), getRating(NHL2018.csv[i,2]), 32)
 
 
 
