@@ -144,12 +144,12 @@ elo.calculation(1200,1000,32)
 # Now working on the model over the course of the 2018 season
 # Trying to work using our getRating function and elo.calculation
 # Also trying to get rid of the 1001, 1000 levels given by the below function
-# If we just ask for the results - it works.
+# If we just ask for the results - it works, but print(results) does not.
 for(i in 1:1){
   results <- elo.calculation(getRating(NHL2018.csv[i,4]), getRating(NHL2018.csv[i,2]), 32)
   print(results)
 }
-# But for whatever reason if we try the entire loop, it prints [1]1001, [1]1000
+# For whatever reason if we try the entire loop, it prints [1]1001, [1]1000
 # But the function does serve its purpose
 # Work in progress on applying it to the entire dataset
 # The main issue I am having with it is that I am trying to pair the updating ratings
