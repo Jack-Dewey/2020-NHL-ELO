@@ -4,16 +4,16 @@
     "created" : 1582230753312.000,
     "dirty" : false,
     "encoding" : "UTF-8",
-    "folds" : "",
-    "hash" : "1395728296",
+    "folds" : "171|38|225|24|\n",
+    "hash" : "582921005",
     "id" : "191768DA",
-    "lastKnownWriteTime" : 1582330386,
-    "last_content_update" : 1582330386714,
-    "path" : "~/GitHub/Final-Project-NHL/THOR README.R",
-    "project_path" : "THOR README.R",
+    "lastKnownWriteTime" : 1582331425,
+    "last_content_update" : 1582331425314,
+    "path" : "~/GitHub/Final-Project-NHL/First Draft Code THOR README.R",
+    "project_path" : "First Draft Code THOR README.R",
     "properties" : {
-        "cursorPosition" : "154,43",
-        "scrollLine" : "127"
+        "cursorPosition" : "53,53",
+        "scrollLine" : "38"
     },
     "read_only" : false,
     "read_only_alternatives" : [

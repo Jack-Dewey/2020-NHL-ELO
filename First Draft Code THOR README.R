@@ -22,38 +22,38 @@ for (i in 1:length(nhl.seasons)) assign(nhl.seasons[i], read.csv(nhl.seasons[i],
 # We can adapt this model to streamline the process to hopefully reduce 
 # computation time
 
-elo.test <- function(Team1, Team2, k) {   # Team 1 and Team 2 values are their numeric ratings
+elo.test <- function(TeamA, TeamB, k) {   # Team A and Team B values are their numeric ratings
                                           # k is the weight of calculation factor
   
   # This calculation is for the expected values for both teams
-  EV1 <- (1 / (1 + 10^((Team2 - Team1)/400))) # This compares the ratings relative
-  EV2 <- (1 / (1 + 10^((Team1 - Team2)/400))) # to the opposing team in order to
+  EVA <- (1 / (1 + 10^((TeamB - TeamA)/400))) # This compares the ratings relative
+  EVB <- (1 / (1 + 10^((TeamA - TeamB)/400))) # to the opposing team in order to
                                               # give a probability of winning
   
   # Calculating change in rating if win or lose for Team 1
-  UpdateWin1  <- Team1 + k * (1 - EV1)
-  UpdateLose1  <- Team1 + k * (0 - EV1)
+  UpdateWinA  <- TeamA + k * (1 - EVA)
+  UpdateLoseA  <- TeamA + k * (0 - EVA)
   
   # The same calculation as above for Team 2
-  UpdateWin2 <- Team2 + ((1-EV1)* k)
-  UpdateLose2 <- Team2 + ((0-EV1)* k)
+  UpdateWinB <- TeamB + ((1-EVB)* k)
+  UpdateLoseB <- TeamB + ((0-EVB)* k)
   
   # prob is the expected score column giving probabilities for winning
   # this creates a data frame of the expected values given as percentage
-  prob <- (data.frame(prob=c(EV1,EV2)) * 100)
-  # Win 1 shows the updated ratings should Team1 win
-  Win1 <- (data.frame(Win1=c(UpdateWin1,UpdateLose2)))
-  # Win 2 shows the updated ratings for both players should Team2 win
-  Win2 <- (data.frame(Win2=c(UpdateLose1,UpdateWin2)))
+  prob <- (data.frame(prob=c(EVA,EVB)) * 100)
+  # Win A shows the updated ratings should TeamA win
+  WinA <- (data.frame(Win1=c(UpdateWinA,UpdateLoseB)))
+  # Win B shows the updated ratings for both players should TeamB win
+  WinB <- (data.frame(Win2=c(UpdateLoseA,UpdateWinB)))
   
-  dattable <- cbind(prob,Win1,Win2)
-  rownames(dattable) <- c('Team1','Team2')
+  dattable <- cbind(prob,WinA,WinB)
+  rownames(dattable) <- c('TeamA','TeamB')
   return(dattable)
 }
-# We can test our model; Team1 has 1200 rating, Team2 with 1000 rating and a k of 32
 
-rep(elo.test(1100,1000,32),7)
-elo.test(1000,1000,32)
+# We can test our model; TeamA has 1200 rating, TeamB with 1000 rating and a k of 32
+elo.test(1200,1000,32)
+
 
 # We use unique function to determine the number of unique teams that played each season
 # We store the team names in teams.char
@@ -65,12 +65,15 @@ teams.rating <-(unique(NHL2018.csv$Home))
 for(i in 1:length(teams.rating)){  # a for loop that applies a value of 1000 to
  teams.rating[i] = 1000            # the length(teams)
 }                                  # loop is a bit unnecessary but it works
+
 # We then bind the two vectors together - teams.char and teams.rating
 # This gives us all 31 teams with a numeric value of 1000
 teams.table <- cbind(teams.char, teams.rating)
 teams.table <- as.data.frame(teams.table)
+
 # Just a test that this works, this gives the rating of the team in the second row
 teams.table[2,]
+
 
 
 
