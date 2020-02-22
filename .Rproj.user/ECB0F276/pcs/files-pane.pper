@@ -1,0 +1,9 @@
+{
+    "path" : "~/GitHub/Final-Project-NHL/Seasons",
+    "sortOrder" : [
+        {
+            "ascending" : true,
+            "columnIndex" : 2
+        }
+    ]
+}

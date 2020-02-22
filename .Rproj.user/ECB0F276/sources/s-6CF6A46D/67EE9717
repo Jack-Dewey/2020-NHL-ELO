@@ -1,0 +1,33 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1582244352579.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "67EE9717",
+    "lastKnownWriteTime" : 7287422520962202146,
+    "last_content_update" : 1582244352579,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "D798DFEE",
+        "caption" : "NHL2018.csv",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=NHL2018.csv&cache_key=D798DFEE",
+        "displayedObservations" : 1271,
+        "environment" : "",
+        "expression" : "NHL2018.csv",
+        "object" : "NHL2018.csv",
+        "preview" : 0,
+        "totalObservations" : 1271,
+        "variables" : 9
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

@@ -1,0 +1,159 @@
+#First we want to load in our data set. Ensure that we include the argument na.strings= "" to include the 'NA' that represents North America rather than missing data
+mammals <- read.csv("F:/Downloads/mammals.csv", na.strings= "")
+##We want to avoid conflicts with NA and missing data rather than North America so we will rename NA to North
+#mammals$continent[mammals$continent == "NA"] <- "North"
+#This attempt above only manages to convert NA into "missing data." I could not figure out a method to rename NA to something else. DO NOT run this code. It breaks the dataset.
+
+
+
+#Our first task is to create a table of frequency for cases on each continent.
+table(mammals$continent)
+
+
+#Our next task is to repair the Af typo and include it in AF continent grouping.
+#To do this we simply rename the data marked Af with AF and then we use the droplevels function.
+mammals$continent[mammals$continent == "Af"] <- "AF"
+mammals$continent <- droplevels(mammals$continent)
+#We then rerun our table(mammals$continent) to double check that the "Af" group has been removed.
+table(mammals$continent)
+
+
+#We next want to identify the number of extinct mammals recorded in our data. We will express this in a frequency table.
+nrow(mammals$status == "extinct")
+#Hm this didn't work. Will try just using a table for all frequencies.
+table(mammals$status)
+#This frequency table tells us there are 242 species recorded in our data to be extinct.
+
+
+#We will now create a contingency table to show the frequency of combined status and continent
+table(mammals$continent, mammals$status)
+#Judging by eye, we can see that Australia has by far the greatest extinct species to extant species ratio.
+
+
+
+
+
+
+#We want to create a bar graph for the mammal species on each continent.
+barplot(table(mammals$continent))
+#Hm, the Insular column exceeds the y-axis labels by a little. We should fix this for clarity.
+barplot(table(mammals$continent), ylim=c(0,1700), ylab = "Frequency", xlab = "Continent")
+
+#Next we want the columns to be ordered in descending order rather than alphabetical.
+#To accomplish this we use the sort function.
+barplot(sort(table(mammals$continent), decreasing=TRUE), ylim=c(0,1700), ylab = "Frequency", xlab = "Continent")
+#Hm this made the label on Oceanic disappear. We can use cex.names to scale down the size of the font to fit on the axis
+barplot(sort(table(mammals$continent), decreasing=TRUE), ylim=c(0,1700), ylab = "Frequency", xlab = "Continent", cex.names = 0.9)
+
+#We want to create a historgram of body mass of species.
+histogram(mammals$mass.grams)
+#Hm, this is not very useful.
+
+#Ok let's fix this crap graph by transforming our data into base 10.
+#The Transform in a Data Frame page tells us how to transform a variable and save result in log base 10.
+mammals$fixedsize <- log10(mammals$mass.grams)
+#Let's see if this fix worked
+histogram(mammals$fixedsize)
+#Nice, this looks a lot more consumable. We need an x-label however
+histogram(mammals$fixedsize, xlab = "Log 10 Body Size")
+
+#Let us change the bin size. We can do this with the breaks=seq() function. The seq(x,y,z) function is the first, last, and bin size. We want a bin size of 2 so we set z=2
+histogram(mammals$fixedsize, xlab = "Log 10 Body Size", breaks=seq(0,10,2))
+#We see a notable amount of information lost when increasing the bin size. Large change in the 0-1 area and 4-5.
+
+#Let us experiment with bin sizes of 1, 0.5, 0.1.
+histogram(mammals$fixedsize, xlab = "Log 10 Body Size", breaks=seq(0,10,1))
+histogram(mammals$fixedsize, xlab = "Log 10 Body Size", breaks=seq(0,10,0.5))
+histogram(mammals$fixedsize, xlab = "Log 10 Body Size", breaks=seq(0,10,0.1))
+#I am not certain which graph is superior. I personally like the 0.1 bin size as it provides the most information at the cost of looking a little displeasing. A bin size of 0.5 is a good medium between information conveyed and clarity of the graph.
+
+#If we want to display probability density, we need to add the prob = TRUE identity.
+hist(mammals$fixedsize, xlab = "Log 10 Body Size", main = "", prob = TRUE, breaks=seq(0,10,0.5))
+#Hm a few columns exceed our y-axis, let's try to fix this.
+hist(mammals$fixedsize, ylim=c(0,0.4), xlab = "Log 10 Body Size", main = "", prob = TRUE, breaks=seq(0,10,0.5))
+
+#How does our histogram compare to a normal distribution? We can see that it slightly resembles a normal distribution, but is right-skewed.
+#We can use a Normal Quantile plot to compare to a normal distribution.
+qqnorm(mammals$fixedsize)
+#We see that the plot seems mostly normal with possibly a little skew around the 0-1 area.
+#We can get a better idea by using a qqline function to add a line that will represent the IQR.
+qqline(mammals$fixedsize)
+#We see the right-skewedness of our data as our quantile plot sits above the quartile line.
+#The histogram shows the departure from a normal distribution very visually. The quartile plot is a more precise explanation of the differences between our data and normal distributions, however it requires more than a cursory glance. I believe the histogram to be the most quickly and easily understood
+
+
+
+#Let's begin comparing frequency distributions
+#We can create a boxplot comparing the mass and their extinction status
+boxplot(mammals$fixedsize, mammals$status)
+#Hmm this doesn't look right
+#The tilde(~) key denotes the response variable on the left and the explanatory variable on the right and connects them for R
+boxplot(mammals$fixedsize ~ mammals$status)
+#On our plot we can see that extinct mammals are notably larger than extant mammals.
+#We see that the lower end of the extinct mammal whiskers is similar to the top end of the interquartile range of extant animals. This indicates that among the smallest of extinct animals share an approximate size with many of the larger currently extant animals.
+
+
+#Let us make the width of each box on our plot proportional to the square root of the sample size. We can do this by using the variable width function varwidth=TRUE. This draws boxes propotional in width to the square root of the sample size.
+boxplot(mammals$fixedsize ~ mammals$status, varwidth=TRUE, main = "Proportional Boxplots of Extinction Status and Size", ylab = "Log 10 Body Mass", xlab = "Extinction Status")
+
+
+#Next we want to create multiple histograms to compare the frequency distribution of body sizes of different extinction status
+#First we subset each of our extinction statuses
+
+exta <- (mammals[mammals$status == "extant",])
+exti <- (mammals[mammals$status == "extinct",])
+historic <- (mammals[mammals$status == "historical",])
+intro <- (mammals[mammals$status == "introduction",])
+#Next we can create our histograms using the subsets of each extinction group. We can use par(mfrow = c(dimensions, dimensions)) to stack our graphs.
+par(mfrow = c(4,1))
+hist(exta$fixedsize, xlab = "Log 10 Body Size", main = "Histogram of Extant on Body Size", breaks=seq(0,10,0.5))
+hist(exti$fixedsize, xlab = "Log 10 Body Size", main = "Histogram of Extinct on Body Size", breaks=seq(0,10,0.5))
+hist(historic$fixedsize, xlab = "Log 10 Body Size", main = "Histogram of Historical on Body Size", breaks=seq(0,10,0.5))
+hist(intro$fixedsize, xlab = "Log 10 Body Size", main = "Histogram of Introduction on Body Size", breaks=seq(0,10,0.5))
+#The difference in size between the groups is rather noticeable when stacked.
+
+
+#Lastly we want to create a table for the median log body mass of each of the extant, extinct, historic, and introduction groups. To do this, we will use our subsets for each group that we had created earlier.
+#Code was bugging out saying it either needed numeric data or undefined columns selected, so I needed to specify column 8. not very elegant.
+extamed <- median(exta[,8], na.rm = TRUE)
+extimed <- median(exti[,8], na.rm = TRUE)
+historicmed <- median(historic[,8], na.rm = TRUE)
+intromed <- median(intro[,8], na.rm = TRUE)
+#Then we combine it into a table. Ok the following code DOES NOT WORK. I tried to group all the medians and then name their columns but don't know how to do that. I have a working table but it is very ugly, shown below.
+allmedian <- c(extamed, extimed, historicmed, intromed) 
+label (allmedian = c("Extant", "Extinct", "Historical", "Introduction"))
+table(allmedian)
+
+#I've forgotten how to change names of values in an object, but this table works, just really ugly.
+table(extamed, extimed, historicmed, intromed)
+par(mfrow = c(1,1))
+
+
+
+#Lets open our new dataset
+bugs <- read.csv("F:/Downloads/fruitflies.csv")
+
+#We want to look at longvevity as the response variable and treatment as the explanatory, thus we use the tilde identity. Suggested to use jitter method
+stripchart(longevity.days ~ treatment, data = bugs, method="jitter")
+#This is a little hard to read, we can change the orientation to better view the data by changing the verticality to make the patterns much more apparent.
+stripchart(longevity.days ~ treatment, data = bugs, method="jitter", vertical=TRUE, cex.axis=1.4, cex.lab=1.4, xlab = "Treatment")
+#We see that the addition of multiple virgin females greatly decrease longevity
+
+
+#Let us compare this data when presented in a boxplot
+boxplot(longevity.days ~ treatment, data = bugs, method="jitter", cex.axis=1.4, cex.lab=1.4, xlab = "Treatment")
+#In my opinion I think that the data is much clearer in the boxplot. Maybe that is because I am more accustomed to it
+
+
+#Lets create a scatterplot looking at thorax length as the explanatory variable and longevity as the response.
+scatter.smooth(bugs$thorax.mm, bugs$longevity.days, xlab = "Thorax Length (mm)", ylab = "Longevity (Days)")
+#We see a seemingly positive linear relationship between thorax length and longevity.
+
+   
+#Lets add colours for different treatments
+
+scatter.smooth(bugs$thorax.mm, bugs$longevity.days, col=as.numeric(factor(bugs$treatment)), pch=16, xlab = "Thorax Length (mm)", ylab = "Longevity (Days)", legend(x=-1,y=13,legend=paste(rep(c("1 pregnant female","1 virgin female","8 pregnant females","8 virgin females", "no females added")))))          
+#Okay so this used to have colours and no legend, but now we have neither colours nor a legend.
+#Getting weird "Error in simpleLoess(y, x, w, span, degree = degree, parametric = FALSE,  : invalid argument 'span'"
+#Kinda stuck here :(
+               
