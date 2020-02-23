@@ -85,8 +85,7 @@ teams.table[2,]
 getRating <- function(team){
   get.rating <- teams.table$teams.rating
   names(get.rating) <- teams.table$teams.char
-  teamrating <- (get.rating[team])
-  print(teamrating)                                         # elo.test no accept factors
+  teamrating <- (get.rating[team])                                       # elo.test no accept factors
 }
 # As a test, let us change the Calgary Flames to a value of 1001 rather than 1000
 teams.rating[5] = 1001  # Calgary is the 5th team in our teams.table
@@ -153,42 +152,13 @@ for(i in 1:1){
 
 # This captures the name of whatever we perform getRating on
 
-testing123 <- getRating(NHL2018.csv[1,4])
+testing123 <- getRating(NHL2018.csv[1,2])
 testing123 <- trimws(capture.output(testing123))
 testing123[1] == "Calgary Flames"
-i <- 1
+
 
 
 # This function then applies the new ratings from NewWinner.temp to the team name fetched by getRating
-for(i in 1:1){
-  ratings.update.func <- function(Winner, Loser){
-    Winner.name <- Winner
-    Winner.name <- trimws(capture.output(Winner.name))
-    Loser.name <- Loser
-    Loser.name <- trimws(capture.output(Loser.name))
-    teams.table <- within(teams.table, teams.rating[teams.char == Winner.name[1]] <- NewWinner.temp)
-    teams.table <- within(teams.table, teams.rating[teams.char == Loser.name[1]] <- NewLoser.temp)
-    teams.table$teams.rating <- as.numeric(teams.table$teams.rating)
-  }
-}
-ratings.update.func(getRating(NHL2018.csv[3,2]), getRating(NHL2018.csv[3,4]))
-teams.table <- within(teams.table, teams.rating[teams.char == 'Calgary Flames'] <- NewLoser.temp)
-
-
-
-Winner <- getRating(NHL2018.csv[3,2])
-Winner.name <- Winner
-Winner.name <- trimws(capture.output(Winner.name))
-Winner.name
-teams.table <- within(teams.table, teams.rating[teams.char == Winner.name[1]] <- NewWinner.temp)
-teams.table$teams.rating <- as.numeric(teams.table$teams.rating)
-
-
-
-ratings.update.func(getRating(NHL2018.csv[4,2]),(getRating(NHL2018.csv[4,4])))
-
-Loser <- getRating(NHL2018.csv[3,4])
-
 ratings.update.func <- function(Winner, Loser){
   Winner.name <<- Winner
   Winner.name <<- trimws(capture.output(Winner.name))
@@ -197,10 +167,13 @@ ratings.update.func <- function(Winner, Loser){
   teams.table <<- within(teams.table, teams.rating[teams.char == Winner.name[1]] <- NewWinner.temp)
   teams.table <<- within(teams.table, teams.rating[teams.char == Loser.name[1]] <- NewLoser.temp)
   teams.table$teams.rating <<- as.numeric(teams.table$teams.rating)
+  print(getRating(Winner.name[1]))
+  print(getRating(Loser.name[1]))
 }
 
 
 
+ratings.update.func(getRating(NHL2018.csv[4,2]), getRating(NHL2018.csv[4,4]))
 
 
 
@@ -214,17 +187,15 @@ ratings.update.func <- function(Winner, Loser){
 
 
 
+
+total.elo.calculation(getRating(NHL2018.csv[4,2]), getRating(NHL2018.csv[4,4]), 32)
 
 
 
 
 total.elo.calculation <- function(Winner, Loser, k){
   elo.calculation(Winner, Loser, k)
-  Winner.New <- 
-  
-  
-  
-  
+  ratings.update.func(Winner, Loser)
   
 }
 
