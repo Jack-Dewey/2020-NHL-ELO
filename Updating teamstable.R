@@ -162,17 +162,55 @@ i <- 1
 # This function then applies the new ratings from NewWinner.temp to the team name fetched by getRating
 for(i in 1:1){
   ratings.update.func <- function(Winner, Loser){
-    Winner.name <- getRating(NHL2018.csv[1,4])
+    Winner.name <- Winner
     Winner.name <- trimws(capture.output(Winner.name))
-    Loser.name <- getRating(NHL2018.csv[1,2])
+    Loser.name <- Loser
     Loser.name <- trimws(capture.output(Loser.name))
     teams.table <- within(teams.table, teams.rating[teams.char == Winner.name[1]] <- NewWinner.temp)
     teams.table <- within(teams.table, teams.rating[teams.char == Loser.name[1]] <- NewLoser.temp)
     teams.table$teams.rating <- as.numeric(teams.table$teams.rating)
   }
 }
-
+ratings.update.func(getRating(NHL2018.csv[3,2]), getRating(NHL2018.csv[3,4]))
 teams.table <- within(teams.table, teams.rating[teams.char == 'Calgary Flames'] <- NewLoser.temp)
+
+
+
+Winner <- getRating(NHL2018.csv[3,2])
+Winner.name <- Winner
+Winner.name <- trimws(capture.output(Winner.name))
+Winner.name
+teams.table <- within(teams.table, teams.rating[teams.char == Winner.name[1]] <- NewWinner.temp)
+teams.table$teams.rating <- as.numeric(teams.table$teams.rating)
+
+
+
+ratings.update.func(getRating(NHL2018.csv[4,2]),(getRating(NHL2018.csv[4,4])))
+
+Loser <- getRating(NHL2018.csv[3,4])
+
+ratings.update.func <- function(Winner, Loser){
+  Winner.name <<- Winner
+  Winner.name <<- trimws(capture.output(Winner.name))
+  Loser.name <<- Loser
+  Loser.name <<- trimws(capture.output(Loser.name))
+  teams.table <<- within(teams.table, teams.rating[teams.char == Winner.name[1]] <- NewWinner.temp)
+  teams.table <<- within(teams.table, teams.rating[teams.char == Loser.name[1]] <- NewLoser.temp)
+  teams.table$teams.rating <<- as.numeric(teams.table$teams.rating)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
