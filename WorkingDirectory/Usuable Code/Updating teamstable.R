@@ -10,8 +10,8 @@
 # This data imports all the datasets that we will be working with into RStudio
 
 NHLwd <- getwd()
-Seasons.Path <- paste(getwd(),"/","Seasons","/",sep ="")
-setwd(paste(NHLwd, "/", "Seasons", "/", sep = ""))
+WD.Path <- paste(getwd(),"/","WorkingDirectory","/",sep ="")
+setwd(paste(NHLwd, "/", "WorkingDirectory", "/", sep = ""))
 nhl.seasons <- list.files(pattern="*.csv")
 for (i in 1:length(nhl.seasons)) assign(nhl.seasons[i], read.csv(nhl.seasons[i], stringsAsFactors = FALSE))
 
