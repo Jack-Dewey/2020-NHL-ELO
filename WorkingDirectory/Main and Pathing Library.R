@@ -9,7 +9,7 @@
 # 1. Working Directory and Pathways
 # 2. 
 # 3. 
-
+# 4. ELO functions required for calculation
 
 # 1. Working Directory and Pathways ---------------------------------------
 
@@ -385,4 +385,150 @@ for(i in 1:dim(NHL2019.csv)){
   }
 }
 
+
+
+# 4. ELO functions required for calculation -------------------------------
+
+# We use unique function to determine the number of unique teams that played each season
+# We store the team names in teams.char
+# We then use teams.rating in a for loop to convert them all to a corresponding value of 1000
+# The 1000 value is the initial rating we are giving all of the teams
+teams.char <-(unique(NHL2018.csv$Home))  # Used the teams of the 2018 season
+teams.char <- sort(teams.char)  # We want them to be ordered alphabetically
+teams.rating <-(unique(NHL2018.csv$Home))
+for(i in 1:length(teams.rating)){  # a for loop that applies a value of 1000 to
+  teams.rating[i] = 1000            # the length(teams)
+}                                  # loop is a bit unnecessary but it works
+
+# We then bind the two vectors together - teams.char and teams.rating
+# This gives us all 31 teams with a numeric value of 1000
+teams.char <- as.character(teams.char)
+teams.table <- cbind(teams.char, teams.rating)
+teams.table <- data.frame(teams.table, stringsAsFactors = F)
+teams.table$teams.rating <- as.numeric(teams.table$teams.rating)
+
+
+getRating <- function(team){
+  get.rating <- teams.table$teams.rating
+  names(get.rating) <- teams.table$teams.char
+  teamrating <- (get.rating[team])
+  print(teamrating)                                   
+}
+
+
+elo.calculation <- function(Winner, Loser, k) {
+  
+  # Expected score for player A and for player B.
+  EVWinner <- (1 / (1 + 10^((Loser - Winner)/400)))
+  EVLoser <- (1 / (1 + 10^((Winner - Loser)/400)))
+  
+  # Calculating change in rating if win or lose
+  UpdatedWinner <- Winner + k * (1 - EVWinner)
+  
+  # Do the same for team2
+  UpdatedLoser<- Loser + ((0-EVLoser)* k)
+  
+  # prob is the expected score column giving probabilities for winning
+  prob <- (data.frame(prob=c(EVWinner,EVLoser)) * 100)
+  # Win 1 shows the updated ratings should Team1 win
+  NewWinnerRating <- (data.frame(WinnerRating=c(UpdatedWinner)))
+  # Likewise for team 2
+  NewLoserRating <- (data.frame(LoserRating=c(UpdatedLoser)))
+  
+  dattable <- cbind(NewWinnerRating,NewLoserRating)
+  rownames(dattable) <- c('Updated Ratings')
+  
+  NewWinner.temp <<- as.numeric(NewWinnerRating)  # saves as a global variable
+  # to be used to store the ratings
+  NewLoser.temp <<- as.numeric(NewLoserRating)    # in our teams.table
+  return(dattable)                                # The .temps will be overwritten on each iteration
+}
+
+
+ratings.update.func <- function(Winner, Loser){
+  Winner.name <<- Winner
+  Winner.name <<- trimws(capture.output(Winner.name))
+  Loser.name <<- Loser
+  Loser.name <<- trimws(capture.output(Loser.name))
+  teams.table <<- within(teams.table, teams.rating[teams.char == Winner.name[1]] <- NewWinner.temp)
+  teams.table <<- within(teams.table, teams.rating[teams.char == Loser.name[1]] <- NewLoser.temp)
+  teams.table$teams.rating <<- as.numeric(teams.table$teams.rating)
+}
+
+total.elo.calculation <- function(Winner, Loser, k){
+  elo.calculation(Winner, Loser, k)
+  ratings.update.func(Winner, Loser)
+}
+
+
+
+
+# 5. ELO Model Testing ----------------------------------------------------
+
+# We then bind the two vectors together - teams.char and teams.rating
+# This gives us all 31 teams with a numeric value of 1000
+teams.char <- as.character(teams.char)
+teams.table <- cbind(teams.char, teams.rating)
+teams.table <- data.frame(teams.table, stringsAsFactors = F)
+teams.table$teams.rating <- as.numeric(teams.table$teams.rating)
+
+
+
+
+for (j in 1:nrow(NHL2006.csv)){
+  total.elo.calculation(getRating(NHL2006.csv[j,10]),(getRating(NHL2006.csv[j,11])),32)
+}
+
+for (j in 1:nrow(NHL2007.csv)){
+  total.elo.calculation(getRating(NHL2007.csv[j,10]),(getRating(NHL2007.csv[j,11])),32)
+}
+
+
+for (j in 1:nrow(NHL2008.csv)){
+  total.elo.calculation(getRating(NHL2008.csv[j,10]),(getRating(NHL2008.csv[j,11])),32)
+}
+
+for (j in 1:nrow(NHL2009.csv)){
+  total.elo.calculation(getRating(NHL2009.csv[j,10]),(getRating(NHL2009.csv[j,11])),32)
+}
+
+for (j in 1:nrow(NHL2010.csv)){
+  total.elo.calculation(getRating(NHL2010.csv[j,10]),(getRating(NHL2010.csv[j,11])),32)
+}
+
+for (j in 1:nrow(NHL2011.csv)){
+  total.elo.calculation(getRating(NHL2011.csv[j,10]),(getRating(NHL2011.csv[j,11])),32)
+}
+
+for (j in 1:nrow(NHL2012.csv)){
+  total.elo.calculation(getRating(NHL2012.csv[j,10]),(getRating(NHL2012.csv[j,11])),32)
+}
+
+for (j in 1:nrow(NHL2013.csv)){
+  total.elo.calculation(getRating(NHL2013.csv[j,10]),(getRating(NHL2013.csv[j,11])),32)
+}
+
+for (j in 1:nrow(NHL2014.csv)){
+  total.elo.calculation(getRating(NHL2014.csv[j,10]),(getRating(NHL2014.csv[j,11])),32)
+}
+
+for (j in 1:nrow(NHL2015.csv)){
+  total.elo.calculation(getRating(NHL2015.csv[j,10]),(getRating(NHL2015.csv[j,11])),32)
+}
+
+for (j in 1:nrow(NHL2016.csv)){
+  total.elo.calculation(getRating(NHL2016.csv[j,10]),(getRating(NHL2016.csv[j,11])),32)
+}
+
+for (j in 1:nrow(NHL2017.csv)){
+  total.elo.calculation(getRating(NHL2017.csv[j,10]),(getRating(NHL2017.csv[j,11])),32)
+}
+
+for (j in 1:nrow(NHL2018.csv)){
+  total.elo.calculation(getRating(NHL2018.csv[j,10]),(getRating(NHL2018.csv[j,11])),32)
+}
+
+for (j in 1:nrow(NHL2019.csv)){
+  total.elo.calculation(getRating(NHL2019.csv[j,10]),(getRating(NHL2019.csv[j,11])),32)
+}
 
