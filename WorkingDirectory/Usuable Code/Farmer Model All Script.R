@@ -1,4 +1,14 @@
 # RESET THE TABLE
+# The 1000 value is the initial rating we are giving all of the teams
+teams.char <-(unique(NHL2018.csv$Home))  # Used the names of teams present in the 2018 season
+teams.char <- sort(teams.char)  # We want them to be ordered alphabetically
+teams.rating <-(unique(NHL2018.csv$Home))
+for(i in 1:length(teams.rating)){  # a for loop that applies a value of 1000 to
+  teams.rating[i] = 1000            # the length(teams)
+}                                  # loop is a bit unnecessary but it works
+
+# We then bind the two vectors together - teams.char and teams.rating
+# This gives us all 31 teams with a numeric value of 1000
 teams.char <- as.character(teams.char)
 teams.table <- cbind(teams.char, teams.rating)
 teams.table <- data.frame(teams.table, stringsAsFactors = F)
