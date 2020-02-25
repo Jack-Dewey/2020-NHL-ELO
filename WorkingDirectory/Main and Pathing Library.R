@@ -412,7 +412,6 @@ getRating <- function(team){
   get.rating <- teams.table$teams.rating
   names(get.rating) <- teams.table$teams.char
   teamrating <- (get.rating[team])
-  print(teamrating)                                   
 }
 
 
