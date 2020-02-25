@@ -89,4 +89,4 @@ who.wins <- function(team.a.id, team.b.id, rseed = 12345, n.reps = 1001){
 simulate.series(1200,1100, 'Winnipeg', 'Nashville')
 TeamA <- 1200
 TeamB <- 1100
-k <- 24
+k <- 32
