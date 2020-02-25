@@ -51,7 +51,15 @@ elo.test.a <- function(team.elo.a, team.elo.b, k){
 }
 
 
-
+# This is our series simulation function.
+# It takes the ratings for two teams, plus their names
+# The function uses the probability that team A wins with the rbinom function
+# to simulate a single match. It then stores each win for a team in win.test for 
+# both team A and team B. As the NHL is a best of 7 format, a team must win a total
+# of 4 games to win the series. Therefore, our function concludes when win.test for
+# either team reaches 4.
+# The function then tells us which team reached 4 wins first and how many rbinom 
+# simulations were needed for a team to reach 4 wins.
 simulate.series <- function(team.elo.a, team.elo.b, team.a, team.b) {
   win.counter <- c(0,0)
   names(win.counter) <- c('a', 'b')
@@ -98,6 +106,8 @@ k <- 32
 # has a rating of 1100. Thus,
 simulate.series(1200,1100, 'Winnipeg', 'Nashville')
 # This gives us the winner and in how many games played in the series
+
+
 
 
 # We can choose to run this simulation any number of times and find the frequency
