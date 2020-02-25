@@ -49,6 +49,11 @@ for (i in 1:length(nhl.playoffs)){
 
 #We need to change the names of teams in earlier seasons to what they are 
 #known as currently
+# This was done semi-farmer style as we struggled to write a for loop that could
+# identify .csv names and change each one procedurally
+# Instead we ended up using the find and replace function
+# Ideally, we would like to have a loop be able to select each of the .csv files
+# and change their values
 
 
 #We need to identify and standardize the team names of teams that play under
@@ -68,23 +73,23 @@ NHL2006.csv$Visitor[PhoenixV] <- "Arizona Coyotes"
 NHL2006.csv$Visitor[AnaheimV] <- "Anaheim Ducks"
 NHL2006.csv$Visitor[AtlantaV] <- "Winnipeg Jets"
 
-#We need to identify and standardize the team names of teams that play under
-#different names currently.
+# 2007 changes
 PhoenixH <- which(NHL2007.csv$Home == "Phoenix Coyotes")
 AnaheimH <- which(NHL2007.csv$Home == "Mighty Ducks of Anaheim")
 AtlantaH <- which(NHL2007.csv$Home == "Atlanta Thrashers")
 PhoenixV <- which(NHL2007.csv$Visitor == "Phoenix Coyotes")
 AnaheimV <- which(NHL2007.csv$Visitor == "Mighty Ducks of Anaheim")
 AtlantaV <- which(NHL2007.csv$Visitor == "Atlanta Thrashers")
-#We change the names in the dataframe for home and away
+
+# 2007 changes
 NHL2007.csv$Home[PhoenixH] <- "Arizona Coyotes"
 NHL2007.csv$Home[AnaheimH] <- "Anaheim Ducks"
 NHL2007.csv$Home[AtlantaH] <- "Winnipeg Jets"
 NHL2007.csv$Visitor[PhoenixV] <- "Arizona Coyotes"
 NHL2007.csv$Visitor[AnaheimV] <- "Anaheim Ducks"
 NHL2007.csv$Visitor[AtlantaV] <- "Winnipeg Jets"
-#We need to identify and standardize the team names of teams that play under
-#different names currently.
+
+# 2008 changes
 PhoenixH <- which(NHL2008.csv$Home == "Phoenix Coyotes")
 AnaheimH <- which(NHL2008.csv$Home == "Mighty Ducks of Anaheim")
 AtlantaH <- which(NHL2008.csv$Home == "Atlanta Thrashers")
@@ -92,7 +97,7 @@ PhoenixV <- which(NHL2008.csv$Visitor == "Phoenix Coyotes")
 AnaheimV <- which(NHL2008.csv$Visitor == "Mighty Ducks of Anaheim")
 AtlantaV <- which(NHL2008.csv$Visitor == "Atlanta Thrashers")
 
-#We change the names in the dataframe for home and away
+# 2008 changes
 NHL2008.csv$Home[PhoenixH] <- "Arizona Coyotes"
 NHL2008.csv$Home[AnaheimH] <- "Anaheim Ducks"
 NHL2008.csv$Home[AtlantaH] <- "Winnipeg Jets"
@@ -100,8 +105,7 @@ NHL2008.csv$Visitor[PhoenixV] <- "Arizona Coyotes"
 NHL2008.csv$Visitor[AnaheimV] <- "Anaheim Ducks"
 NHL2008.csv$Visitor[AtlantaV] <- "Winnipeg Jets"
 
-#We need to identify and standardize the team names of teams that play under
-#different names currently.
+# 2009 changes
 PhoenixH <- which(NHL2009.csv$Home == "Phoenix Coyotes")
 AnaheimH <- which(NHL2009.csv$Home == "Mighty Ducks of Anaheim")
 AtlantaH <- which(NHL2009.csv$Home == "Atlanta Thrashers")
@@ -109,7 +113,7 @@ PhoenixV <- which(NHL2009.csv$Visitor == "Phoenix Coyotes")
 AnaheimV <- which(NHL2009.csv$Visitor == "Mighty Ducks of Anaheim")
 AtlantaV <- which(NHL2009.csv$Visitor == "Atlanta Thrashers")
 
-#We change the names in the dataframe for home and away
+# 2009 changes
 NHL2009.csv$Home[PhoenixH] <- "Arizona Coyotes"
 NHL2009.csv$Home[AnaheimH] <- "Anaheim Ducks"
 NHL2009.csv$Home[AtlantaH] <- "Winnipeg Jets"
@@ -117,8 +121,7 @@ NHL2009.csv$Visitor[PhoenixV] <- "Arizona Coyotes"
 NHL2009.csv$Visitor[AnaheimV] <- "Anaheim Ducks"
 NHL2009.csv$Visitor[AtlantaV] <- "Winnipeg Jets"
 
-#We need to identify and standardize the team names of teams that play under
-#different names currently.
+# 2010 changes
 PhoenixH <- which(NHL2010.csv$Home == "Phoenix Coyotes")
 AnaheimH <- which(NHL2010.csv$Home == "Mighty Ducks of Anaheim")
 AtlantaH <- which(NHL2010.csv$Home == "Atlanta Thrashers")
@@ -126,7 +129,7 @@ PhoenixV <- which(NHL2010.csv$Visitor == "Phoenix Coyotes")
 AnaheimV <- which(NHL2010.csv$Visitor == "Mighty Ducks of Anaheim")
 AtlantaV <- which(NHL2010.csv$Visitor == "Atlanta Thrashers")
 
-#We change the names in the dataframe for home and away
+# 2010 changes
 NHL2010.csv$Home[PhoenixH] <- "Arizona Coyotes"
 NHL2010.csv$Home[AnaheimH] <- "Anaheim Ducks"
 NHL2010.csv$Home[AtlantaH] <- "Winnipeg Jets"
@@ -134,8 +137,7 @@ NHL2010.csv$Visitor[PhoenixV] <- "Arizona Coyotes"
 NHL2010.csv$Visitor[AnaheimV] <- "Anaheim Ducks"
 NHL2010.csv$Visitor[AtlantaV] <- "Winnipeg Jets"
 
-#We need to identify and standardize the team names of teams that play under
-#different names currently.
+# 2011 changes
 PhoenixH <- which(NHL2011.csv$Home == "Phoenix Coyotes")
 AnaheimH <- which(NHL2011.csv$Home == "Mighty Ducks of Anaheim")
 AtlantaH <- which(NHL2011.csv$Home == "Atlanta Thrashers")
@@ -143,7 +145,7 @@ PhoenixV <- which(NHL2011.csv$Visitor == "Phoenix Coyotes")
 AnaheimV <- which(NHL2011.csv$Visitor == "Mighty Ducks of Anaheim")
 AtlantaV <- which(NHL2011.csv$Visitor == "Atlanta Thrashers")
 
-#We change the names in the dataframe for home and away
+# 2011 changes
 NHL2011.csv$Home[PhoenixH] <- "Arizona Coyotes"
 NHL2011.csv$Home[AnaheimH] <- "Anaheim Ducks"
 NHL2011.csv$Home[AtlantaH] <- "Winnipeg Jets"
@@ -151,8 +153,7 @@ NHL2011.csv$Visitor[PhoenixV] <- "Arizona Coyotes"
 NHL2011.csv$Visitor[AnaheimV] <- "Anaheim Ducks"
 NHL2011.csv$Visitor[AtlantaV] <- "Winnipeg Jets"
 
-#We need to identify and standardize the team names of teams that play under
-#different names currently.
+# 2012 changes
 PhoenixH <- which(NHL2012.csv$Home == "Phoenix Coyotes")
 AnaheimH <- which(NHL2012.csv$Home == "Mighty Ducks of Anaheim")
 AtlantaH <- which(NHL2012.csv$Home == "Atlanta Thrashers")
@@ -160,7 +161,7 @@ PhoenixV <- which(NHL2012.csv$Visitor == "Phoenix Coyotes")
 AnaheimV <- which(NHL2012.csv$Visitor == "Mighty Ducks of Anaheim")
 AtlantaV <- which(NHL2012.csv$Visitor == "Atlanta Thrashers")
 
-#We change the names in the dataframe for home and away
+# 2012 changes
 NHL2012.csv$Home[PhoenixH] <- "Arizona Coyotes"
 NHL2012.csv$Home[AnaheimH] <- "Anaheim Ducks"
 NHL2012.csv$Home[AtlantaH] <- "Winnipeg Jets"
@@ -168,8 +169,7 @@ NHL2012.csv$Visitor[PhoenixV] <- "Arizona Coyotes"
 NHL2012.csv$Visitor[AnaheimV] <- "Anaheim Ducks"
 NHL2012.csv$Visitor[AtlantaV] <- "Winnipeg Jets"
 
-#We need to identify and standardize the team names of teams that play under
-#different names currently.
+# 2013 changes
 PhoenixH <- which(NHL2013.csv$Home == "Phoenix Coyotes")
 AnaheimH <- which(NHL2013.csv$Home == "Mighty Ducks of Anaheim")
 AtlantaH <- which(NHL2013.csv$Home == "Atlanta Thrashers")
@@ -177,7 +177,7 @@ PhoenixV <- which(NHL2013.csv$Visitor == "Phoenix Coyotes")
 AnaheimV <- which(NHL2013.csv$Visitor == "Mighty Ducks of Anaheim")
 AtlantaV <- which(NHL2013.csv$Visitor == "Atlanta Thrashers")
 
-#We change the names in the dataframe for home and away
+# 2013 changes
 NHL2013.csv$Home[PhoenixH] <- "Arizona Coyotes"
 NHL2013.csv$Home[AnaheimH] <- "Anaheim Ducks"
 NHL2013.csv$Home[AtlantaH] <- "Winnipeg Jets"
@@ -185,8 +185,7 @@ NHL2013.csv$Visitor[PhoenixV] <- "Arizona Coyotes"
 NHL2013.csv$Visitor[AnaheimV] <- "Anaheim Ducks"
 NHL2013.csv$Visitor[AtlantaV] <- "Winnipeg Jets"
 
-#We need to identify and standardize the team names of teams that play under
-#different names currently.
+# 2014 changes
 PhoenixH <- which(NHL2014.csv$Home == "Phoenix Coyotes")
 AnaheimH <- which(NHL2014.csv$Home == "Mighty Ducks of Anaheim")
 AtlantaH <- which(NHL2014.csv$Home == "Atlanta Thrashers")
@@ -194,7 +193,7 @@ PhoenixV <- which(NHL2014.csv$Visitor == "Phoenix Coyotes")
 AnaheimV <- which(NHL2014.csv$Visitor == "Mighty Ducks of Anaheim")
 AtlantaV <- which(NHL2014.csv$Visitor == "Atlanta Thrashers")
 
-#We change the names in the dataframe for home and away
+# 2014 changes
 NHL2014.csv$Home[PhoenixH] <- "Arizona Coyotes"
 NHL2014.csv$Home[AnaheimH] <- "Anaheim Ducks"
 NHL2014.csv$Home[AtlantaH] <- "Winnipeg Jets"
@@ -202,8 +201,7 @@ NHL2014.csv$Visitor[PhoenixV] <- "Arizona Coyotes"
 NHL2014.csv$Visitor[AnaheimV] <- "Anaheim Ducks"
 NHL2014.csv$Visitor[AtlantaV] <- "Winnipeg Jets"
 
-#We need to identify and standardize the team names of teams that play under
-#different names currently.
+# The final year that required team name changes is 2015
 PhoenixH <- which(NHL2015.csv$Home == "Phoenix Coyotes")
 AnaheimH <- which(NHL2015.csv$Home == "Mighty Ducks of Anaheim")
 AtlantaH <- which(NHL2015.csv$Home == "Atlanta Thrashers")
@@ -211,7 +209,7 @@ PhoenixV <- which(NHL2015.csv$Visitor == "Phoenix Coyotes")
 AnaheimV <- which(NHL2015.csv$Visitor == "Mighty Ducks of Anaheim")
 AtlantaV <- which(NHL2015.csv$Visitor == "Atlanta Thrashers")
 
-#We change the names in the dataframe for home and away
+# 2015
 NHL2015.csv$Home[PhoenixH] <- "Arizona Coyotes"
 NHL2015.csv$Home[AnaheimH] <- "Anaheim Ducks"
 NHL2015.csv$Home[AtlantaH] <- "Winnipeg Jets"
@@ -224,7 +222,11 @@ NHL2015.csv$Visitor[AtlantaV] <- "Winnipeg Jets"
 # 3. Functions for Adding Winners and Losers -------------------------------
 
 
-#We need to add a column for winners and losers for our model to work
+#We need to add a column in our datasets for winners and losers for our model to work
+# To do this, we created a for loop using if statements
+# These if statements measure which team scored the most points in a match
+# It then creates a new column and inputs the name of the winner and loser for each
+
 
 for(i in 1:dim(NHL2006.csv)){
   if(NHL2006.csv$G[i] > NHL2006.csv$G.1[i]){
@@ -407,14 +409,21 @@ teams.table <- cbind(teams.char, teams.rating)
 teams.table <- data.frame(teams.table, stringsAsFactors = F)
 teams.table$teams.rating <- as.numeric(teams.table$teams.rating)
 
-
+# We needed to create a function that can lookup the ratings of each team by
+# the team name
+# To accomplish this, we wrote the getRating function
+# The getRating function looks at the teams.table and attaches a team name
+# that corresponds to their rating
 getRating <- function(team){
   get.rating <- teams.table$teams.rating
   names(get.rating) <- teams.table$teams.char
   teamrating <- (get.rating[team])
 }
 
-
+# elo.calculation is the first of 2 elo functions we created
+# elo.calculation takes the winner and loser name, uses the getRating function
+# gets the teams initial elo rating, then calculates the resulting elo rating
+# after considering which team won and which team lost
 elo.calculation <- function(Winner, Loser, k) {
   
   # Expected score for player A and for player B.
@@ -443,17 +452,24 @@ elo.calculation <- function(Winner, Loser, k) {
   return(dattable)                                # The .temps will be overwritten on each iteration
 }
 
-
+# The ratings.update.func is a function to be used in conjunction with elo.calculation
+# ratings.update.func uses the updated ratings (NewWinner/Loser.temp) and reattaches
+# the updated values back onto the corresponding team in teams.table
+# The function needs the trimws command because for whatever reason, the team names
+# have an extra space in them
 ratings.update.func <- function(Winner, Loser){
   Winner.name <<- Winner
-  Winner.name <<- trimws(capture.output(Winner.name))
+  Winner.name <<- trimws(capture.output(Winner.name)) 
   Loser.name <<- Loser
   Loser.name <<- trimws(capture.output(Loser.name))
   teams.table <<- within(teams.table, teams.rating[teams.char == Winner.name[1]] <- NewWinner.temp)
   teams.table <<- within(teams.table, teams.rating[teams.char == Loser.name[1]] <- NewLoser.temp)
   teams.table$teams.rating <<- as.numeric(teams.table$teams.rating)
 }
-
+# total.elo.calculation takes the two functions about, elo.calculation and ratings.update.func
+# and combines them into a single function.
+# First it calculates the appropriate new ratings, then applies them back to our
+# teams.table which has the ratings for each team in the league
 total.elo.calculation <- function(Winner, Loser, k){
   elo.calculation(Winner, Loser, k)
   ratings.update.func(Winner, Loser)
@@ -461,18 +477,19 @@ total.elo.calculation <- function(Winner, Loser, k){
 
 
 
-
 # 5. ELO Model Testing ----------------------------------------------------
 
-# We then bind the two vectors together - teams.char and teams.rating
-# This gives us all 31 teams with a numeric value of 1000
-teams.char <- as.character(teams.char)
-teams.table <- cbind(teams.char, teams.rating)
-teams.table <- data.frame(teams.table, stringsAsFactors = F)
-teams.table$teams.rating <- as.numeric(teams.table$teams.rating)
+# This is where we run the testing. We can choose what seasons we wish to draw
+# our data from. We can choose to have our model use data from between 2006-2019
+# seasons. This allows us to build an accurate model. By using previous years data,
+# we create a ranking of teams which will allow us to predict future performance.
+# Teams gain or lose rating depending on the outcome and the strength of their 
+# opponent. The higher rated their opponent, the more points they stand to gain
+# from winning. Likewise, if they lose to a highly rated pponent, they will lose fewer
+# points than if they were to lose to a weak opponent.
 
-
-
+# The model works by applying the total.elo.calculation function to each game played
+# over the course of any amount of selected seasons
 
 for (j in 1:nrow(NHL2006.csv)){
   total.elo.calculation(getRating(NHL2006.csv[j,10]),(getRating(NHL2006.csv[j,11])),32)
