@@ -147,3 +147,5 @@ multiple.simulations <- function(team.elo.a, team.elo.b, team.a, team.b, sims){
 
 multiple.simulations(1150,1100,'Washington', 'Vegas', 100)
 
+
+multiple.simulations(getRating("Vancouver Canucks"), getRating("Arizona Coyotes"), 'Vancouver', 'Arizona', 1000)
