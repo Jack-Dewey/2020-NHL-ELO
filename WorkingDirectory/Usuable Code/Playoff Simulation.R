@@ -146,7 +146,16 @@ multiple.simulations <- function(team.elo.a, team.elo.b, team.a, team.b, sims){
   table(simulations.temp)
 }
 
-multiple.simulations(1150,1100,'Washington', 'Vegas', 100)
+# Below is the function we used to simulate best-of-7-series'. Unfortunately, we
+# ran out of time to reasonably make scalable and fully reproducible for loop to
+# run these simulations automatically.
+# Instead, we manually inputted the names of teams into the getRating function for
+# each playoff series.
+# Running the multiple.simulations function will produce a table with the probabilities
+# for every outcome as well as a frequency distribution bar plot.
+multiple.simulations(getRating("St. Louis Blues"), getRating("Boston Bruins"), 'Blues', 'Bruins', 10000)
 
-
-multiple.simulations(getRating("Tampa Bay Lightning"), getRating("Columbus Blue Jackets"), 'Tampa', 'Columbus', 10000)
+# Please feel free to try out the multiple.simulations function
+# The format is 
+# multiple.simulations(getRating("INSERT TEAM1 NAME"), getRating("INSERT TEAM2 NAME"), 'Team1', 'Team2', #simulations)
+      
