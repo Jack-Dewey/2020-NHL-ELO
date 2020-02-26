@@ -69,8 +69,8 @@ simulate.series <- function(team.elo.a, team.elo.b, team.a, team.b) {
     # Calculate winning percentage of team A 
     win.p.a <- elo.test.a(team.elo.a, team.elo.b, k)
     win.p.a <- win.p.a/100
-    win.test <- rbinom(1 , 1, win.p.a)
-    if(win.test == 1) {
+    win.test <- rbinom(1 , 1, win.p.a) # running simulation for which team wins
+    if(win.test == 1) {   # if/else argument for determining when a team wins the series
       some.winner <- 
         win.vector <- 1
       wins.toadd <- c(1,0)
@@ -86,8 +86,8 @@ simulate.series <- function(team.elo.a, team.elo.b, team.a, team.b) {
   # Determine winner and return number of games
   n.games <- sum(win.counter)
   
-  winner <- names(which(win.counter == 4))
-  if(winner == 'a') {
+  winner <- names(which(win.counter == 4)) # when win.counter reaches 4 for either team
+  if(winner == 'a') {                      # determines the winner
     winning.team = team.a
   } else {
     winning.team = team.b
@@ -120,11 +120,45 @@ testing.sim <- replicate(
      simulate.series(1200,1100,'Vancouver', 'Calgary')
   }
 )
-# We then store this result and show the frequency on a barplot
-testing.sim <- t(testing.sim)  # The data is stored odd, so we apply a transpose
-colnames(testing.sim) <- c("Team", "Series Length")
-testing.sim <- as.data.frame(testing.sim)
-barplot(table(testing.sim), ylim =c(0,30), legend.text = TRUE, xlab = "Number of games played in a series", ylab = "Frequency")
-table(testing.sim)
+
+# We then take the replicate and simulate series functions to create a combined function
+# multiple.simulations function takes the elo ratings from 2 teams, their names,
+# and the amount of simulations we want to run for a playoff series
+# The function then simulates any number of times and produces a barplot
+# that shows the frequency of teams winning in a certain number of games.
+multiple.simulations <- function(team.elo.a, team.elo.b, team.a, team.b, sims){
+  simulations.temp <- replicate(
+    sims,
+    {
+      simulate.series(team.elo.a, team.elo.b, team.a, team.b)
+    }
+  )
+  simulations.temp <- t(simulations.temp)  # need to transpose as our data is formatted weird
+  colnames(simulations.temp) <- c("Team", "Series Length")  # adding column names
+  simulations.temp <- as.data.frame(simulations.temp)
+  barplot(table(simulations.temp), xlab = "Number of games played in a series", ylab = "Frequency", beside = T)
+  legend("topleft",
+         legend = levels(simulations.temp$Team),
+         col = c("black", "grey"),
+         pch =16,
+         bty ="n")
+  table(simulations.temp)
+}
+
+multiple.simulations(1150,1100,'Washington', 'Vegas', 100)
 
 
+# prepare the matrix for barplot
+# note that we exclude the 3rd column and we transpose the data
+mx <- t(as.matrix(testing.sim[-3]))
+colnames(mx) <- testing.sim$`Series Length`
+
+colours = c("red","blue")
+# note the use of ylim to give 30% space for the legend
+barplot(mx,main='Playoff Series Frequency',ylab='Frequency', xlab='Games played',beside = TRUE, 
+        col=colours, ylim=c(0,max(mx)*1.3))
+# to add a box around the plot
+box()
+
+# add a legend
+legend('topright',fill=colours,legend=c('Vancouver','Calgary'))

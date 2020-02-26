@@ -226,7 +226,8 @@ NHL2015.csv$Visitor[AtlantaV] <- "Winnipeg Jets"
 # To do this, we created a for loop using if statements
 # These if statements measure which team scored the most points in a match
 # It then creates a new column and inputs the name of the winner and loser for each
-
+# THIS WILL PRODUCE MANY WARNINGS: THIS IS EXPECTED
+# The warning message "numerical expresssion has 2 elements" is what we want to see.
 
 for(i in 1:dim(NHL2006.csv)){
   if(NHL2006.csv$G[i] > NHL2006.csv$G.1[i]){
