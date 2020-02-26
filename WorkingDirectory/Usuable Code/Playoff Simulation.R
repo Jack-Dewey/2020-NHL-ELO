@@ -141,11 +141,12 @@ multiple.simulations <- function(team.elo.a, team.elo.b, team.a, team.b, sims){
          legend = levels(simulations.temp$Team),
          col = c("black", "grey"),
          pch =16,
-         bty ="n")
+         bty ="n",
+         cex = 0.7)
   table(simulations.temp)
 }
 
 multiple.simulations(1150,1100,'Washington', 'Vegas', 100)
 
 
-multiple.simulations(getRating("Vancouver Canucks"), getRating("Arizona Coyotes"), 'Vancouver', 'Arizona', 1000)
+multiple.simulations(getRating("Tampa Bay Lightning"), getRating("Columbus Blue Jackets"), 'Tampa', 'Columbus', 10000)
