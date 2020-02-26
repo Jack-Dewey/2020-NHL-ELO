@@ -18,6 +18,7 @@ WD.Path <- paste(getwd(),"/",sep ="")
 Playoff.Path <- paste(getwd(),"/", "Playoffs", "/", sep ="")
 UnusedCode.Path <- paste(getwd(),"/", "Unused Code", "/", sep ="")
 UsableCode.Path <- paste(getwd(),"/", "Usuable Code", "/", sep ="")
+TablesnFigs.Path <- paste(getwd(),"/", "Tables and Figures","/", sep = "")
 
 #List the regular seasons csv files in the WD
 nhl.seasons <- list.files(pattern="*.csv")  
@@ -545,6 +546,9 @@ for (j in 1:nrow(NHL2019.csv)){
 }
 
 
+
+#We should save our teams.table as a csv
+write.csv(teams.table, paste(TablesnFigs.Path, "Team ELO.csv", sep = ""))
 
 # 6. Playoff Simulations --------------------------------------------------
 
