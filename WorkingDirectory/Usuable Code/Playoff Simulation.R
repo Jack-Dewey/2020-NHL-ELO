@@ -136,13 +136,13 @@ multiple.simulations <- function(team.elo.a, team.elo.b, team.a, team.b, sims){
   simulations.temp <- t(simulations.temp)  # need to transpose as our data is formatted weird
   colnames(simulations.temp) <- c("Team", "Series Length")  # adding column names
   simulations.temp <- as.data.frame(simulations.temp)
-  barplot(table(simulations.temp), xlab = "Number of games played in a series", ylab = "Frequency", beside = T)
+  barplot(table(simulations.temp), xlab = "Number of games played in a series", ylab = "Frequency", beside = T,)
   legend("topleft",
          legend = levels(simulations.temp$Team),
          col = c("black", "grey"),
          pch =16,
          bty ="n",
-         cex = 0.7)
+         cex = 1.0)
   table(simulations.temp)
 }
 
@@ -158,4 +158,25 @@ multiple.simulations(getRating("St. Louis Blues"), getRating("Boston Bruins"), '
 # Please feel free to try out the multiple.simulations function
 # The format is 
 # multiple.simulations(getRating("INSERT TEAM1 NAME"), getRating("INSERT TEAM2 NAME"), 'Team1', 'Team2', #simulations)
-      
+
+
+# Below is the farmer code for all the 2019 playoff series
+# WARNING: THESE CALCULATIONS WILL EACH TAKE A SIGNIFICANT AMOUNT OF TIME
+# Run this script only if you would like to observe the simulation model predict a series
+# As none of these simulations use a set seed, the results will be slightly different
+# upon each interation
+multiple.simulations(getRating("Tampa Bay Lightning"), getRating("Columbus Blue Jackets"), 'Tampa', 'Columbus', 1000)
+multiple.simulations(getRating("Boston Bruins"), getRating("Toronto Maple Leafs"), 'Boston', 'Toronto', 1000)
+multiple.simulations(getRating("Washington Capitals"), getRating("Carolina Hurricanes"), 'Washington', 'Carolina', 5000)
+multiple.simulations(getRating("New York Islanders"), getRating("Pittsburgh Penguins"), 'Penguins', 'Islanders', 1000)
+multiple.simulations(getRating("Dallas Stars"), getRating("Nashville Predators"), 'Dallas', 'Nashville', 1000)
+multiple.simulations(getRating("St. Louis Blues"), getRating("Winnipeg Jets"), 'Blues', 'Jets', 1000)
+multiple.simulations(getRating("Colorado Avalanche"), getRating("Calgary Flames"), 'Col', 'CLG', 1000)
+multiple.simulations(getRating("San Jose Sharks"), getRating("Vegas Golden Knights"), 'SJS', 'VGS', 1000)
+multiple.simulations(getRating("Columbus Blue Jackets"), getRating("Boston Bruins"), 'CBJ', 'BOS', 1000)
+multiple.simulations(getRating("Carolina Hurricanes"), getRating("New York Islanders"), 'CAR', 'NYI', 1000)
+multiple.simulations(getRating("Carolina Hurricanes"), getRating("Boston Bruins"), 'CAR', 'BOS', 1000)
+multiple.simulations(getRating("Dallas Stars"), getRating("St. Louis Blues"), 'DAL', 'Blues', 1000)
+multiple.simulations(getRating("San Jose Sharks"), getRating("St. Louis Blues"), 'SJS', 'Blues', 1000)
+multiple.simulations(getRating("San Jose Sharks"), getRating("Colorado Avalanche"), 'SJS', 'AVS', 1000)
+multiple.simulations(getRating("St. Louis Blues"), getRating("Boston Bruins"), 'Blues', 'Bruins', 10000)
