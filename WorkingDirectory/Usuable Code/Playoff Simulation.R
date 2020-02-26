@@ -147,18 +147,3 @@ multiple.simulations <- function(team.elo.a, team.elo.b, team.a, team.b, sims){
 
 multiple.simulations(1150,1100,'Washington', 'Vegas', 100)
 
-
-# prepare the matrix for barplot
-# note that we exclude the 3rd column and we transpose the data
-mx <- t(as.matrix(testing.sim[-3]))
-colnames(mx) <- testing.sim$`Series Length`
-
-colours = c("red","blue")
-# note the use of ylim to give 30% space for the legend
-barplot(mx,main='Playoff Series Frequency',ylab='Frequency', xlab='Games played',beside = TRUE, 
-        col=colours, ylim=c(0,max(mx)*1.3))
-# to add a box around the plot
-box()
-
-# add a legend
-legend('topright',fill=colours,legend=c('Vancouver','Calgary'))
