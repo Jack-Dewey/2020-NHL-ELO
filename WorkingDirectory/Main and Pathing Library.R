@@ -549,3 +549,4 @@ for (j in 1:nrow(NHL2019.csv)){
   total.elo.calculation(getRating(NHL2019.csv[j,10]),(getRating(NHL2019.csv[j,11])),32)
 }
 
+
