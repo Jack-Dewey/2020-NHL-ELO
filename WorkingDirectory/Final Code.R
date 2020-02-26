@@ -545,7 +545,10 @@ for (j in 1:nrow(NHL2019.csv)){
 }
 
 
+<<<<<<< HEAD:WorkingDirectory/Final Code.R
 
 # 6. Playoff Simulations --------------------------------------------------
 
 source(paste(UsableCode.Path, "Playoff Simulation.R", sep = ""), local = F)
+=======
+>>>>>>> 4e9a40f5ef5cb66fc2a731596c48fd232bd44323:WorkingDirectory/Main and Pathing Library.R
