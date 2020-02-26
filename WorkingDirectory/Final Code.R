@@ -1,16 +1,11 @@
-#Title: Main Codes and Pathing
+#Title: Final Code
 #Name: Michael Lee and Jack Dewey
 #Date: February 23rd, 2020
 #
-#Description: Creating pathways and main codes for visibility and 
-#reproducibility 
+#Description: Final code for our project containing our functions and model
+#testing
 #
 # Index:
-# 1. Working Directory and Pathways
-# 2. 
-# 3. 
-# 4. ELO functions required for calculation
-
 # 1. Working Directory and Pathways ---------------------------------------
 
 #Current WD is the repository
@@ -219,7 +214,7 @@ NHL2015.csv$Visitor[AtlantaV] <- "Winnipeg Jets"
 
 
 
-# 3. Functions for Adding Winners and Losers -------------------------------
+# 3. Functions for Adding Winners and Losers in the data -----------------------
 
 
 #We need to add a column in our datasets for winners and losers for our model to work
@@ -549,3 +544,8 @@ for (j in 1:nrow(NHL2019.csv)){
   total.elo.calculation(getRating(NHL2019.csv[j,10]),(getRating(NHL2019.csv[j,11])),32)
 }
 
+
+
+# 6. Playoff Simulations --------------------------------------------------
+
+source(paste(UsableCode.Path, "Playoff Simulation.R", sep = ""), local = F)
