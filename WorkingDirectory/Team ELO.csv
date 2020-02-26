@@ -1,32 +1,32 @@
-"","teams.char","teams.rating"
-"1","Anaheim Ducks",973.90450428629
-"2","Arizona Coyotes",979.44908022612
-"3","Boston Bruins",1087.30766052768
-"4","Buffalo Sabres",875.125688521101
-"5","Calgary Flames",1043.68379915795
-"6","Carolina Hurricanes",1068.55452896276
-"7","Chicago Blackhawks",976.414545847427
-"8","Colorado Avalanche",985.528291223882
-"9","Columbus Blue Jackets",1059.78603218375
-"10","Dallas Stars",1021.22685523939
-"11","Detroit Red Wings",932.633169571165
-"12","Edmonton Oilers",931.062731275795
-"13","Florida Panthers",980.067658520876
-"14","Los Angeles Kings",934.02608545601
-"15","Minnesota Wild",956.793487207964
-"16","Montreal Canadiens",1020.15082807362
-"17","Nashville Predators",1052.96793337792
-"18","New Jersey Devils",926.227557284686
-"19","New York Islanders",1051.7360388083
-"20","New York Rangers",903.076680415431
-"21","Ottawa Senators",889.007990813963
-"22","Philadelphia Flyers",973.782752096102
-"23","Pittsburgh Penguins",1037.69529744225
-"24","San Jose Sharks",1032.17523743923
-"25","St. Louis Blues",1065.42261066345
-"26","Tampa Bay Lightning",1187.69742417027
-"27","Toronto Maple Leafs",1000.921209358
-"28","Vancouver Canucks",936.843711539516
-"29","Vegas Golden Knights",1001.40574589647
-"30","Washington Capitals",1081.51557358046
-"31","Winnipeg Jets",1033.80929083218
+,teams.char,teams.rating
+1,Tampa Bay Lightning,1187.697424
+2,Boston Bruins,1087.307661
+3,Washington Capitals,1081.515574
+4,Carolina Hurricanes,1068.554529
+5,St. Louis Blues,1065.422611
+6,Columbus Blue Jackets,1059.786032
+7,Nashville Predators,1052.967933
+8,New York Islanders,1051.736039
+9,Calgary Flames,1043.683799
+10,Pittsburgh Penguins,1037.695297
+11,Winnipeg Jets,1033.809291
+12,San Jose Sharks,1032.175237
+13,Dallas Stars,1021.226855
+14,Montreal Canadiens,1020.150828
+15,Vegas Golden Knights,1001.405746
+16,Toronto Maple Leafs,1000.921209
+17,Colorado Avalanche,985.5282912
+18,Florida Panthers,980.0676585
+19,Arizona Coyotes,979.4490802
+20,Chicago Blackhawks,976.4145458
+21,Anaheim Ducks,973.9045043
+22,Philadelphia Flyers,973.7827521
+23,Minnesota Wild,956.7934872
+24,Vancouver Canucks,936.8437115
+25,Los Angeles Kings,934.0260855
+26,Detroit Red Wings,932.6331696
+27,Edmonton Oilers,931.0627313
+28,New Jersey Devils,926.2275573
+29,New York Rangers,903.0766804
+30,Ottawa Senators,889.0079908
+31,Buffalo Sabres,875.1256885
